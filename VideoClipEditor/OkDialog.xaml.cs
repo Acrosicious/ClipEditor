@@ -25,14 +25,15 @@ namespace VideoClipEditor
 
         public OkDialog(string file)
         {
-            this.file = file;
-
             InitializeComponent();
+
+            this.file = file;
             this.Owner = App.Current.MainWindow;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = false;
             this.Close();
         }
 
@@ -43,6 +44,7 @@ namespace VideoClipEditor
                 System.Diagnostics.Process.Start("explorer.exe", "/Select,\"" + file + "\"");
             }
 
+            this.DialogResult = true;
             this.Close();
         }
     }
