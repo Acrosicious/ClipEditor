@@ -110,14 +110,15 @@ namespace VideoClipEditor
             // Process open file dialog box results
             if (result == true)
             {
-                mediaPlayer.Pause();
-                mediaPlayer.Stop();
+                mediaPlayer.Clock.Controller.Pause();
                 progressBar.Value = 0;
                 saveFileLocation = dialog.FileName;
                 await SaveWebmTask(dialog.FileName, (int)rangeSlider.LowerValue,
                     (int)(rangeSlider.UpperValue - rangeSlider.LowerValue), mediaPlayer.IsMuted);
                 progressBar.Value = 100;
             }
+
+            editingEnabled = true;
         }
 
         private Task SaveWebmTask(string FileName, int start, int length, bool isMuted)
