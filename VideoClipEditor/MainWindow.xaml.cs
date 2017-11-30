@@ -80,6 +80,7 @@ namespace VideoClipEditor
                 // Open document
                 var timeline = new MediaTimeline(new Uri(dialog.FileName));
                 mediaPlayer.Clock = timeline.CreateClock(true) as MediaClock;
+                PlayVideo();
                 //mediaPlayer.Source = new Uri(dialog.FileName);
             }
         }
@@ -110,7 +111,7 @@ namespace VideoClipEditor
             // Process open file dialog box results
             if (result == true)
             {
-                mediaPlayer.Clock.Controller.Pause();
+                PauseVideo();
                 progressBar.Value = 0;
                 saveFileLocation = dialog.FileName;
                 await SaveWebmTask(dialog.FileName, (int)rangeSlider.LowerValue,
@@ -209,8 +210,14 @@ namespace VideoClipEditor
                 videoTimeSlider.Maximum = rangeSlider.Maximum * 100;
 
                 mediaPlayer.Clock.CurrentTimeInvalidated += TimeChanged;
+                mediaPlayer.Clock.Completed += VideoEnded;
                 Console.WriteLine("Time is: " + mediaPlayer.NaturalDuration.TimeSpan.TotalSeconds);
             }
+        }
+
+        private void VideoEnded(object sender, EventArgs e)
+        {
+            SeekToValue(0);
         }
 
         private void videoTimeSlider_DragCompleted(object sender, DragCompletedEventArgs e)
@@ -232,7 +239,7 @@ namespace VideoClipEditor
 
         private void videoTimeSlider_DragStarted(object sender, DragStartedEventArgs e)
         {
-            loopClipCheckbox.IsChecked = false;
+            //loopClipCheckbox.IsChecked = false;
             updateSlider = false;
         }
 
@@ -249,15 +256,24 @@ namespace VideoClipEditor
             }
         }
 
-        private bool btnState = false;
+        private void PauseVideo()
+        {
+            mediaPlayer.Clock.Controller.Pause();
+            VisualStateManager.GoToState(playPauseButton, "Paused", true);
+        }
+
+        private void PlayVideo()
+        {
+            mediaPlayer.Clock.Controller.Resume();
+            VisualStateManager.GoToState(playPauseButton, "Playing", true);
+        }
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-            Console.WriteLine(btnState + " clicked");
-            if((btnState = !btnState))
-                VisualStateManager.GoToState((FrameworkElement) sender, "Playing", true);
+            if (mediaPlayer.Clock.IsPaused)
+                PlayVideo();
             else
-                VisualStateManager.GoToState((FrameworkElement) sender, "Paused", true);
+                PauseVideo();
         }
     }
 }
