@@ -18,5 +18,6 @@
         <Slider Name="videoTimeSlider" Margin="10,0,10,89" Thumb.DragStarted="videoTimeSlider_DragStarted" Thumb.DragCompleted="videoTimeSlider_DragCompleted" Thumb.DragDelta="videoTimeSlider_DragDelta" IsMoveToPointEnabled="True" Height="16" VerticalAlignment="Bottom" />
         <CheckBox Name="loopClipCheckbox" Content="Loop Clip" Margin="199,0,0,24" HorizontalAlignment="Left" Width="89" Height="18" VerticalAlignment="Bottom" IsChecked="{Binding ClipLooped, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         <Button Content="Reset" Margin="0,0,90,19" HorizontalAlignment="Right" Width="75" Height="27" VerticalAlignment="Bottom" Click="ResetButton_Click" />
+        <Button Content="Button" Margin="10,0,733.6,120.147" Template="{DynamicResource PlayPauseButton}" Height="50" VerticalAlignment="Bottom"/>
     </Grid>
 </Controls:MetroWindow>
