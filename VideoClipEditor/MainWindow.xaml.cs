@@ -248,5 +248,16 @@ namespace VideoClipEditor
                 SeekToValue((int)(videoTimeSlider.Value / 100.0));
             }
         }
+
+        private bool btnState = false;
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            Console.WriteLine(btnState + " clicked");
+            if((btnState = !btnState))
+                VisualStateManager.GoToState((FrameworkElement) sender, "Playing", true);
+            else
+                VisualStateManager.GoToState((FrameworkElement) sender, "Paused", true);
+        }
     }
 }

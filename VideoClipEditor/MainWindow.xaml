@@ -8,16 +8,16 @@
         mc:Ignorable="d"
         Name="window" Title="Clip Editor" Height="561.29" Width="800" MinHeight="560" MinWidth="800" BorderBrush="Black" >
     <Grid>
-        <MediaElement Name="mediaPlayer" Margin="0,0,0,110" MediaOpened="VideoOpened" ScrubbingEnabled="True" IsMuted="{Binding ElementName=muteCheckbox, Path=IsChecked}" LoadedBehavior="Manual" />
-        <Controls:RangeSlider Name="rangeSlider" Margin="10,0,10,45" TickFrequency="1" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" Minimum="0" UpperThumbDragCompleted="UpperValueChanged" LowerThumbDragCompleted="LowerValueChanged" CentralThumbDragCompleted="LowerValueChanged" MinRange="1" Height="33" VerticalAlignment="Bottom" IsSnapToTickEnabled="True" MinRangeWidth="10"/>
-        <Controls:MetroProgressBar Name="progressBar" Height="15" Value="100" VerticalAlignment="Bottom" Margin="0,0,0,-1" />
+        <MediaElement x:Name="mediaPlayer" Margin="0,0,0,110" MediaOpened="VideoOpened" ScrubbingEnabled="True" IsMuted="{Binding IsChecked, ElementName=muteCheckbox}" LoadedBehavior="Manual" />
+        <Controls:RangeSlider x:Name="rangeSlider" Margin="10,0,10,45" TickFrequency="1" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" Minimum="0" UpperThumbDragCompleted="UpperValueChanged" LowerThumbDragCompleted="LowerValueChanged" CentralThumbDragCompleted="LowerValueChanged" MinRange="1" Height="33" VerticalAlignment="Bottom" IsSnapToTickEnabled="True" MinRangeWidth="10"/>
+        <Controls:MetroProgressBar x:Name="progressBar" Height="15" Value="100" VerticalAlignment="Bottom" Margin="0,0,0,-1" />
         <Button Content="Save Clip" Click="SaveWebm_Click" Margin="0,0,10,19" HorizontalAlignment="Right" Width="75" Height="27" VerticalAlignment="Bottom"/>
         <Button Content="Load Video" Click="LoadVideo_Click" HorizontalAlignment="Left" Margin="10,0,0,19" Width="75" Height="27" VerticalAlignment="Bottom"/>
-        <Label Name="timeLabel" Content="0:10" Margin="328,0,325,20" Height="26" VerticalAlignment="Bottom" HorizontalContentAlignment="Center"/>
-        <CheckBox Name="muteCheckbox" Content="Mute Audio" Margin="103,0,598,24" Height="18" VerticalAlignment="Bottom" IsChecked="True"/>
-        <Slider Name="videoTimeSlider" Margin="10,0,10,89" Thumb.DragStarted="videoTimeSlider_DragStarted" Thumb.DragCompleted="videoTimeSlider_DragCompleted" Thumb.DragDelta="videoTimeSlider_DragDelta" IsMoveToPointEnabled="True" Height="16" VerticalAlignment="Bottom" />
-        <CheckBox Name="loopClipCheckbox" Content="Loop Clip" Margin="199,0,0,24" HorizontalAlignment="Left" Width="89" Height="18" VerticalAlignment="Bottom" IsChecked="{Binding ClipLooped, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label x:Name="timeLabel" Content="0:10" Margin="328,0,325,20" Height="26" VerticalAlignment="Bottom" HorizontalContentAlignment="Center"/>
+        <CheckBox x:Name="muteCheckbox" Content="Mute Audio" Margin="103,0,598,24" Height="18" VerticalAlignment="Bottom" IsChecked="True"/>
+        <Slider x:Name="videoTimeSlider" Margin="10,0,10,89" Thumb.DragStarted="videoTimeSlider_DragStarted" Thumb.DragCompleted="videoTimeSlider_DragCompleted" Thumb.DragDelta="videoTimeSlider_DragDelta" IsMoveToPointEnabled="True" Height="16" VerticalAlignment="Bottom" />
+        <CheckBox x:Name="loopClipCheckbox" Content="Loop Clip" Margin="199,0,0,24" HorizontalAlignment="Left" Width="89" Height="18" VerticalAlignment="Bottom" IsChecked="{Binding ClipLooped, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Content="PlayPause" Margin="10,0,733.6,120.147" Template="{DynamicResource PlayPauseButton}" Height="50" VerticalAlignment="Bottom" Click="Button_Click" />
         <Button Content="Reset" Margin="0,0,90,19" HorizontalAlignment="Right" Width="75" Height="27" VerticalAlignment="Bottom" Click="ResetButton_Click" />
-        <Button Content="Button" Margin="10,0,733.6,120.147" Template="{DynamicResource PlayPauseButton}" Height="50" VerticalAlignment="Bottom"/>
     </Grid>
 </Controls:MetroWindow>
