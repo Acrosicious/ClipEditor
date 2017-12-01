@@ -10,9 +10,10 @@
         WindowStartupLocation="CenterOwner"
         Title="Done" Height="200" Width="300">
     <Grid>
-        <Button Content="OK" Margin="0,0,10,10" Click="Button_Click" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" />
+        <Button Content="OK" Margin="0,0,10,10" Click="OkBtnClick" Height="27" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" />
         <TextBlock Margin="10,10,10,42" TextWrapping="Wrap" Text="Done Converting"/>
-        <Button Content="Show File" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="Button_Click_1" Height="27" VerticalAlignment="Bottom"/>
+        <Button Content="Show File" HorizontalAlignment="Left" Margin="10,0,0,10" Width="75" Click="ShowFileBtnClick" Height="27" VerticalAlignment="Bottom"/>
+        <Button Content="Upload Gfycat" HorizontalAlignment="Left" Margin="90,0,0,10.4" Width="100" Click="UploadBtnClick" Height="27" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Controls:MetroWindow>

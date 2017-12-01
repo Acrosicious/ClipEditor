@@ -31,13 +31,13 @@ namespace VideoClipEditor
             this.Owner = App.Current.MainWindow;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void OkBtnClick(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
             this.Close();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ShowFileBtnClick(object sender, RoutedEventArgs e)
         {
             if (File.Exists(file))
             {
@@ -46,6 +46,19 @@ namespace VideoClipEditor
 
             this.DialogResult = true;
             this.Close();
+        }
+
+        private void UploadBtnClick(object sender, RoutedEventArgs e)
+        {
+            if (File.Exists(file))
+            {
+                GfycatService.UploadVideo(file);
+                Console.WriteLine("Done");
+            }
+            else
+            {
+                Console.WriteLine("File not found!");
+            }
         }
     }
 }

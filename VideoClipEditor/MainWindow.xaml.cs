@@ -69,7 +69,7 @@ namespace VideoClipEditor
             dialog.Filter = "MP4 file (.mp4)|*.mp4"; // Filter files by extension
 
             // Show open file dialog box
-            Nullable<bool> result = dialog.ShowDialog();
+            bool? result = dialog.ShowDialog();
 
             // Process open file dialog box results
             if (result == true)
@@ -106,7 +106,7 @@ namespace VideoClipEditor
             dialog.Filter = "WEBM file (.webm)|*.webm";
 
             // Show open file dialog box
-            Nullable<bool> result = dialog.ShowDialog();
+            bool? result = dialog.ShowDialog();
 
             // Process open file dialog box results
             if (result == true)
