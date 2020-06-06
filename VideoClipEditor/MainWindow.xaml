@@ -3,10 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:local="clr-namespace:VideoClipEditor"
         mc:Ignorable="d"
         Name="window" Title="Clip Editor" Height="561.29" Width="800" MinHeight="560" MinWidth="800" BorderBrush="Black" >
+    <Controls:MetroWindow.LeftWindowCommands>
+        <Controls:WindowCommands>
+            <Controls:DropDownButton Content="{iconPacks:Modern Kind=Settings}">
+
+            </Controls:DropDownButton>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.LeftWindowCommands>
     <Controls:MetroWindow.Resources>
         <local:VideoAspectToBoundingBox x:Key="VideoAspectToBoundingBox"/>
     </Controls:MetroWindow.Resources>
