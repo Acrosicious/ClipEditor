@@ -1,6 +1,7 @@
 ﻿using MediaToolkit;
 using MediaToolkit.Options;
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -26,6 +27,8 @@ namespace VideoClipEditor
         private bool updateSlider = true;
         public bool ClipLooped { get; set; }
 
+        static readonly string[] video_file_formats = new string[] { ".mp4" };
+
         public MainWindow()
         {
             InitializeComponent();
@@ -50,7 +53,7 @@ namespace VideoClipEditor
                     Console.WriteLine("Done");
                 }
             });
-            
+
             //dialog.ShowDialog();
             //MessageBox.Show(window, "Clip succesfully converted!", "Done");
         }
@@ -74,15 +77,20 @@ namespace VideoClipEditor
             // Process open file dialog box results
             if (result == true)
             {
-                editingEnabled = false;
-                currentFile = dialog.FileName;
-
-                // Open document
-                var timeline = new MediaTimeline(new Uri(dialog.FileName));
-                mediaPlayer.Clock = timeline.CreateClock(true) as MediaClock;
-                PlayVideo();
-                //mediaPlayer.Source = new Uri(dialog.FileName);
+                OpenFile(dialog.FileName);
             }
+        }
+
+        private void OpenFile(string filepath)
+        {
+            editingEnabled = false;
+            currentFile = filepath;
+
+            // Open document
+            var timeline = new MediaTimeline(new Uri(filepath));
+            mediaPlayer.Clock = timeline.CreateClock(true) as MediaClock;
+            PlayVideo();
+            //mediaPlayer.Source = new Uri(dialog.FileName);
         }
 
         private void LowerValueChanged(object sender, System.Windows.Controls.Primitives.DragCompletedEventArgs e)
@@ -267,13 +275,25 @@ namespace VideoClipEditor
             mediaPlayer.Clock.Controller.Resume();
             VisualStateManager.GoToState(playPauseButton, "Playing", true);
         }
-        
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if (mediaPlayer.Clock.IsPaused)
                 PlayVideo();
             else
                 PauseVideo();
+        }
+
+        private void Grid_Drop(object sender, DragEventArgs e)
+        {
+            var files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            if (files.Length > 0)
+            {
+                if (video_file_formats.Where(x => files[0].ToLower().EndsWith(x)).Count() > 0)
+                {
+                    OpenFile(files[0]);
+                }
+            }
         }
     }
 }

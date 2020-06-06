@@ -10,9 +10,9 @@
     <Controls:MetroWindow.Resources>
         <local:VideoAspectToBoundingBox x:Key="VideoAspectToBoundingBox"/>
     </Controls:MetroWindow.Resources>
-    <Grid>
-        <Grid Margin="0,0,0,110">
-            <MediaElement x:Name="mediaPlayer" MediaOpened="VideoOpened" ScrubbingEnabled="True" IsMuted="{Binding IsChecked, ElementName=muteCheckbox}" LoadedBehavior="Manual" />
+    <Grid Background="Transparent" AllowDrop="True" Drop="Grid_Drop">
+        <Grid Margin="0,0,0,110" >
+            <MediaElement x:Name="mediaPlayer" MediaOpened="VideoOpened" ScrubbingEnabled="True" IsMuted="{Binding IsChecked, ElementName=muteCheckbox}" LoadedBehavior="Manual"/>
             <Button x:Name="playPauseButton" Content="PlayPause" Template="{DynamicResource PlayPauseButton}" Click="Button_Click" Width="50" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="{Binding ActualWidth, Converter={StaticResource VideoAspectToBoundingBox}, ElementName=mediaPlayer, Mode=OneWay}" />
         </Grid>
         <Controls:RangeSlider x:Name="rangeSlider" Margin="10,0,10,45" TickFrequency="1" AutoToolTipPlacement="TopLeft" AutoToolTipPrecision="1" Minimum="0" UpperThumbDragCompleted="UpperValueChanged" LowerThumbDragCompleted="LowerValueChanged" CentralThumbDragCompleted="LowerValueChanged" MinRange="1" Height="33" VerticalAlignment="Bottom" IsSnapToTickEnabled="True" MinRangeWidth="10"/>
