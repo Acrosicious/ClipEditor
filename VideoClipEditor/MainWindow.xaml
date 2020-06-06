@@ -11,6 +11,11 @@
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands>
             <Controls:DropDownButton Content="{iconPacks:Modern Kind=Settings}">
+                <Controls:DropDownButton.Items>
+                    <RadioButton Content="720 Low" IsChecked="True" Checked="QualitySelectionChanged" CommandParameter="720low"/>
+                    <RadioButton Content="720 High" Checked="QualitySelectionChanged" CommandParameter="720high"/>
+                    <RadioButton Content="1080 High" Checked="QualitySelectionChanged" CommandParameter="1080high"/>
+                </Controls:DropDownButton.Items>
 
             </Controls:DropDownButton>
         </Controls:WindowCommands>

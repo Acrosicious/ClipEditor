@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -135,16 +136,13 @@ namespace VideoClipEditor
             return Task.Run(() =>
             {
                 var engine = new Engine();
+
                 new MediaToolkit.Options.ConversionOptions
                 {
                     VideoSize = VideoSize.Hd720,
                 };
-                string command = "-ss " + start + " -i \""
-                    + currentFile + "\" -t "
-                    + length
-                    + " -c:v libvpx -crf 4 -b:v 1500K -vf scale=1280:-1 "
-                    + (isMuted ? "-an " : "")
-                    + "\"" + FileName + "\"";
+
+                string command = VideoEditorSettings.currentQuality.command(start, currentFile, length, isMuted, FileName);
 
                 clipLength = length * 1000;
                 Console.WriteLine(command);
@@ -292,6 +290,18 @@ namespace VideoClipEditor
                 if (video_file_formats.Where(x => files[0].ToLower().EndsWith(x)).Count() > 0)
                 {
                     OpenFile(files[0]);
+                }
+            }
+        }
+
+        private void QualitySelectionChanged(object sender, RoutedEventArgs e)
+        {
+            var cmd = (string)((RadioButton)sender).CommandParameter;
+            foreach(var quality in VideoEditorSettings.videoQualityCommands)
+            {
+                if(quality.commandLabel == cmd)
+                {
+                    VideoEditorSettings.currentQuality = quality;
                 }
             }
         }
